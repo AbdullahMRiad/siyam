@@ -7,22 +7,22 @@ export class StatusManager {
     timeUntilNextEvent: Duration | null = $state(null);
 
     constructor() {
-        $effect(() => {
-            function update(i: boolean | null, t: Duration | null) {
-                if (prayerTimesManager.prayerTimesResponse) {
-                    console.log("Starting timer...");
-                    i = updateStatus(
-                        prayerTimesManager.prayerTimesResponse,
-                    ).isFasting;
-                    t = updateStatus(
-                        prayerTimesManager.prayerTimesResponse,
-                    ).timeUntilNextEvent;
-                }
-            }
+        $effect.root(() => {
+            $effect(() => {
+                const update = () => {
+                    if (prayerTimesManager.prayerTimesResponse) {
+                        const status = updateStatus(
+                            prayerTimesManager.prayerTimesResponse,
+                        );
+                        this.isFasting = status.isFasting;
+                        this.timeUntilNextEvent = status.timeUntilNextEvent;
+                    }
+                };
 
-            update(this.isFasting, this.timeUntilNextEvent);
-            const timer = setInterval(update, 1000);
-            return () => clearInterval(timer);
+                update();
+                const timer = setInterval(update, 1000);
+                return () => clearInterval(timer);
+            });
         });
     }
 }
