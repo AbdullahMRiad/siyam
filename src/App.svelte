@@ -14,11 +14,31 @@
     import { settings } from "./lib/settings-manager.svelte";
     import { prayerTimesManager } from "./lib/prayer-times.svelte";
     import { status } from "./lib/status-manager.svelte";
+    import { banner } from "./lib/banner-manager.svelte";
 
     import Settings from "./components/settings/settings.svelte";
     import Status from "./components/status.svelte";
     import Time from "./components/time.svelte";
     import updateStatus from "./utils/updateStatus";
+
+    $effect(() => {
+        banner.set(null);
+
+        if (!settings.isCoordsAvailable) {
+            banner.set("أدخل موقعك من الإعدادات", "warning");
+        }
+
+        if (prayerTimesManager.loading) {
+            banner.set("جارٍ تحميل أوقات الصلاة...", "info");
+        }
+
+        if (prayerTimesManager.error) {
+            banner.set(
+                "حدث خطأ عند تحميل أوقات الصلاة: " + prayerTimesManager.error,
+                "error",
+            );
+        }
+    });
 </script>
 
 <main
@@ -28,16 +48,18 @@
     style:font-weight={settings.fontWeight}
     style:font-family={settings.fontFamily}>
     <Settings />
-    {#if !settings.isCoordsAvailable}<p class="banner yellow">
-            أدخل موقعك من الإعدادات
-        </p>{/if}
-    {#if prayerTimesManager.loading}
-        <p class="banner blue">جارٍ تحميل أوقات الصلاة...</p>
-    {:else if prayerTimesManager.error}
-        <p class="banner red">
-            خطأ في تحميل أوقات الصلاة: {prayerTimesManager.error.message}
-        </p>
-    {:else if prayerTimesManager.prayerTimesResponse}
+
+    <p
+        class="banner"
+        class:blue={banner.current?.type === "info"}
+        class:red={banner.current?.type === "error"}
+        class:yellow={banner.current?.type === "warning"}
+        class:hidden={!banner.current?.type ||
+            !banner.current?.message ||
+            !banner.current}>
+        {banner.current.message}
+    </p>
+    {#if status.isFasting !== null}
         <div class="main-data">
             <Status isFasting={status.isFasting} />
             <Time duration={status.timeUntilNextEvent} />
@@ -68,6 +90,10 @@
     .banner.blue {
         background-color: hsl(200deg 100% 90%);
         color: black;
+    }
+
+    .hidden {
+        display: none;
     }
 
     .main-data {

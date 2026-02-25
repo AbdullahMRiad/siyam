@@ -1,16 +1,27 @@
 <script lang="ts">
     import { settings } from "../../lib/settings-manager.svelte";
+    import { banner } from "../../lib/banner-manager.svelte";
 
     let isSettingsShown: boolean = false;
 
     function detectLocation() {
         if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                settings.latitude = position.coords.latitude;
-                settings.longitude = position.coords.longitude;
-            });
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    settings.latitude = position.coords.latitude;
+                    settings.longitude = position.coords.longitude;
+                },
+                (error) => {
+                    banner.set(
+                        "حدث خطأ عند محاولة تحديد الموقع. حاول مرة أخرى أو أدخل الموقع يدويًا.",
+                        "error",
+                    );
+                    console.error("Geolocation error:", error);
+                },
+            );
         } else {
-            alert("Geolocation is not available");
+            banner.set("خدمة تحديد الموقع غير متوفرة", "error");
+            console.error("Geolocation is not available");
         }
     }
 </script>
