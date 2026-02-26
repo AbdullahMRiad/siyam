@@ -20,6 +20,7 @@
     import Status from "./components/status.svelte";
     import Time from "./components/time.svelte";
     import updateStatus from "./utils/updateStatus";
+    import detectLocation from "./utils/detectLocation";
 
     $effect(() => {
         banner.set(null);
@@ -39,6 +40,8 @@
             );
         }
     });
+
+    if (!settings.isCoordsAvailable) detectLocation();
 </script>
 
 <main
