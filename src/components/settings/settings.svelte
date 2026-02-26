@@ -15,8 +15,7 @@
         class="settings-toggle">
         الإعدادات
     </button>
-    <div
-        class={`settings-panel settings-${isSettingsShown ? "shown" : "hidden"}`}>
+    <div class="settings-panel" class:settings-hidden={isSettingsShown}>
         <section>
             <label>
                 <input
