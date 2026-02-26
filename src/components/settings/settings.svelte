@@ -41,7 +41,7 @@
                 <input
                     type="radio"
                     bind:group={settings.locationMode}
-                    value="automatic" />
+                    value="auto" />
                 تحديد الموقع تلقائيًا
             </label>
             <label>
