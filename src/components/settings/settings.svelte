@@ -1,153 +1,302 @@
 <script lang="ts">
     import { settings } from "../../lib/settings-manager.svelte";
     import { banner } from "../../lib/banner-manager.svelte";
+    import { X, Settings } from "@lucide/svelte";
 
     import detectLocation from "../../utils/detectLocation";
 
     let isSettingsShown: boolean = false;
+    let settingsDialog: HTMLDialogElement;
+
+    const toggleSettings = () => {
+        if (!isSettingsShown) {
+            settingsDialog.show();
+        } else {
+            settingsDialog.close();
+        }
+        isSettingsShown = !isSettingsShown;
+    };
 </script>
 
 <div class="settings-container">
     <button
-        on:click={() => {
-            isSettingsShown = !isSettingsShown;
-        }}
-        class="settings-toggle">
-        الإعدادات
+        on:click={() => toggleSettings()}
+        class="btn-icon btn-ghost"
+        title="toggle settings">
+        <Settings />
     </button>
-    <div class="settings-panel" class:settings-hidden={isSettingsShown}>
-        <section>
-            <label>
-                <input
-                    type="radio"
-                    bind:group={settings.locationMode}
-                    value="auto" />
-                تحديد الموقع تلقائيًا
-            </label>
-            <label>
-                <input
-                    type="radio"
-                    bind:group={settings.locationMode}
-                    value="manual" />
-                إدخال الموقع يدويًا
-            </label>
-        </section>
-
-        {#if settings.locationMode === "auto"}
-            <button on:click={detectLocation}>تحديد الموقع</button>
-        {:else}
-            <section>
-                <label>
-                    دائرة العرض:
+    <dialog
+        class="settings-panel"
+        bind:this={settingsDialog}
+        on:close={() => {
+            isSettingsShown = false;
+        }}
+        closedby="any">
+        <header>
+            <h1>الإعدادات</h1>
+        </header>
+        <div class="controls">
+            <span class="section-label">الموقع</span>
+            <hr />
+            <div class="location">
+                <button
+                    class="btn-primary"
+                    on:click={() => {
+                        detectLocation();
+                    }}>
+                    تحديد الموقع تلقائيًا
+                </button>
+                <label for="latitude" class="control">
+                    <span class="label">دائرة العرض</span>
                     <input
                         type="number"
-                        bind:value={settings.latitude}
-                        step="any"
-                        placeholder="0.0000" />
+                        name="latitude"
+                        id="latitude"
+                        bind:value={settings.latitude} />
                 </label>
-                <label>
-                    خط الطول:
+                <label for="longitude" class="control">
+                    <span class="label">خط الطول</span>
                     <input
                         type="number"
-                        bind:value={settings.longitude}
-                        step="any"
-                        placeholder="0.0000" />
+                        name="longitude"
+                        id="longitude"
+                        bind:value={settings.longitude} />
                 </label>
-            </section>
-        {/if}
-
-        <hr />
-
-        <section>
-            <label>
-                لون الخلفية:
-                <input type="color" bind:value={settings.backgroundColor} />
-            </label>
-            <label>
-                لون النص:
-                <input type="color" bind:value={settings.foregroundColor} />
-            </label>
-        </section>
-
-        <section>
-            <label>
-                الخط:
+            </div>
+            <span class="section-label">المظهر</span>
+            <hr />
+            <div class="colors">
+                <label for="bg-color" class="control">
+                    <span class="label">لون الخلفية</span>
+                    <div class="color-input">
+                        <input
+                            type="color"
+                            name="bg-color"
+                            id="bg-color"
+                            bind:value={settings.backgroundColor} />
+                        <input
+                            type="text"
+                            name="bg-color-text"
+                            id="bg-color-text"
+                            bind:value={settings.backgroundColor} />
+                    </div>
+                </label>
+                <label for="fg-color" class="control">
+                    <span class="label">لون النص</span>
+                    <div class="color-input">
+                        <input
+                            type="color"
+                            name="fg-color"
+                            id="fg-color"
+                            bind:value={settings.foregroundColor} />
+                        <input
+                            type="text"
+                            name="fg-color-text"
+                            id="fg-color-text"
+                            bind:value={settings.foregroundColor} />
+                    </div>
+                </label>
+            </div>
+            <label class="control">
+                <span class="label">الخط</span>
                 <input type="text" bind:value={settings.fontFamily} />
             </label>
-            <label>
-                حجم الخط (بكسل):
-                <input type="number" bind:value={settings.fontSize} />
+            <label class="control">
+                <span class="label">حجم الخط</span>
+                <div class="slider-control">
+                    <input type="text" bind:value={settings.fontSize} />
+                    <input
+                        type="range"
+                        max="512"
+                        min="1"
+                        bind:value={settings.fontSize} />
+                </div>
             </label>
-            <label>
-                سمك الخط:
-                <input
-                    type="range"
-                    min="1"
-                    max="1000"
-                    bind:value={settings.fontWeight} />
-                <input
-                    type="number"
-                    min="1"
-                    max="1000"
-                    width="18px"
-                    bind:value={settings.fontWeight} />
+            <label class="control">
+                <span class="label">سمك الخط</span>
+                <div class="slider-control">
+                    <input type="text" bind:value={settings.fontWeight} />
+                    <input
+                        type="range"
+                        max="1000"
+                        min="1"
+                        bind:value={settings.fontWeight} />
+                </div>
             </label>
-        </section>
-    </div>
+        </div>
+    </dialog>
 </div>
 
 <style>
     .settings-container {
         position: fixed;
-        bottom: 4px;
-        right: 4px;
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 4px;
-        align-items: start;
+        inset: 0;
     }
 
     .settings-panel {
+        position: fixed;
+        top: 0.5rem;
+        right: 0.5rem;
+        z-index: 1;
+        width: 30vw;
+        max-height: calc(100vh - 1rem);
+        padding: 1rem;
+        border: 0;
+        border-radius: var(--radius-lg);
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        padding: 1rem;
-        border: 1px solid #ccc;
-        width: max-content;
-        background-color: white;
-        color: black;
-        font-size: 16px;
-        font-weight: 400;
+        overflow-y: scroll;
+        font-size: var(--font-size);
+        background-color: var(--color-surface);
+        color: var(--color-ink);
+        opacity: 100%;
+        scale: 1;
+        transform-origin: top right;
         transition:
-            opacity 250ms cubic-bezier(0.49, 1.48, 0.61, 0.99),
-            translate 250ms cubic-bezier(0.49, 1.48, 0.61, 0.99),
-            scale 250ms cubic-bezier(0.49, 1.48, 0.61, 0.99);
-        transition-property: opacity, translate, scale;
-        border-radius: 16px;
-        box-shadow: 0px 4px 24px rgb(0 0 0 / 0.2);
+            scale var(--duration) var(--ease-elastic),
+            translate var(--duration) var(--ease-elastic),
+            opacity var(--duration) var(--ease-elastic);
+        overscroll-behavior-y: none;
     }
 
-    .settings-panel.settings-hidden {
+    .settings-panel:not([open]) {
+        opacity: 0%;
+        scale: 0.5;
         pointer-events: none;
-        opacity: 0;
-        translate: 40% 55%;
-        scale: 0.25 0.1;
     }
 
-    section {
+    .settings-panel header {
+        position: sticky;
+        top: -1rem;
+        left: 0;
+        right: 0;
+        margin: -1rem -1rem 0;
+        padding: 1rem;
+        padding-right: 4rem;
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-rule);
+    }
+
+    .controls {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
     }
 
-    label {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        gap: 1rem;
+    button[title="toggle settings"] {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.25rem;
+        z-index: 10;
+        rotate: 0deg;
+        transition:
+            top var(--duration) var(--ease-elastic),
+            right var(--duration) var(--ease-elastic),
+            rotate var(--duration) var(--ease-elastic);
     }
 
-    .settings-toggle {
-        width: min-content;
+    .settings-container:has(dialog:not([open]))
+        button[title="toggle settings"] {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    button[title="toggle settings"] > :global(svg) {
+        rotate: 0deg;
+        transition: rotate var(--duration) var(--ease-elastic);
+    }
+
+    button[title="toggle settings"]:hover > :global(svg) {
+        rotate: 60deg;
+    }
+    button[title="toggle settings"]:active > :global(svg) {
+        rotate: 90deg;
+    }
+
+    .location {
+        display: grid;
+        grid-template:
+            "btn btn"
+            "lat lon";
+        gap: 0.5rem;
+
+        & > button {
+            grid-area: btn;
+        }
+
+        & > .control:has(#latitude) {
+            grid-area: lat;
+        }
+
+        & > .control:has(#longitude) {
+            grid-area: lon;
+        }
+    }
+
+    .colors {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .color-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input
+        > input[type="color"] {
+        position: absolute;
+        left: 0.5em;
+        padding: 0;
+        width: unset;
+        height: 2em;
+        width: 2em;
+
+        &::-moz-color-swatch {
+            border: 0;
+            padding: 0;
+        }
+    }
+
+    .color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input
+        > input[type="text"] {
+        direction: ltr;
+        padding-left: 3.15em;
+    }
+
+    .slider-control {
+        display: flex;
+        gap: 0.25rem;
+        flex-direction: row-reverse;
+        align-items: center;
+
+        & > input[type="text"] {
+            box-sizing: content-box;
+            flex: 1 0;
+            min-width: 4ch;
+            text-align: center;
+        }
+
+        & > input[type="text"] {
+            flex: 0 1;
+        }
+    }
+
+    @media (width <= 750px) {
+        .settings-panel {
+            inset: 1rem;
+            width: auto;
+            height: auto;
+            position: fixed;
+        }
     }
 </style>
