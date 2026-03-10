@@ -1,5 +1,4 @@
 export class SettingsManager {
-    locationMode: "auto" | "manual" = $state("auto");
     latitude: number | null = $state(null);
     longitude: number | null = $state(null);
     backgroundColor = $state("#ffffff");
@@ -13,8 +12,6 @@ export class SettingsManager {
 
         const params = new URLSearchParams(window.location.search);
 
-        this.locationMode =
-            params.get("location_mode") === "manual" ? "manual" : "auto";
         this.latitude = params.get("latitude")
             ? parseFloat(params.get("latitude")!)
             : null;
