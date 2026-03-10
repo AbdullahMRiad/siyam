@@ -5,8 +5,12 @@ export default function detectLocation() {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                settings.latitude = position.coords.latitude;
-                settings.longitude = position.coords.longitude;
+                settings.latitude = parseFloat(
+                    position.coords.latitude.toFixed(7),
+                );
+                settings.longitude = parseFloat(
+                    position.coords.longitude.toFixed(7),
+                );
             },
             (error) => {
                 banner.set(
