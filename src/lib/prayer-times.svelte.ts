@@ -3,8 +3,8 @@ import {
     AlAdhanRequests,
     type AlAdhanTypes,
 } from "@islamicnetwork/sdk";
-import { settings } from "./settings-manager.svelte";
 import { format } from "date-fns";
+import { settings } from "./settings-manager.svelte";
 
 export class PrayerTimesManager {
     client: AlAdhanClient = AlAdhanClient.create();

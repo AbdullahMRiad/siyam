@@ -1,10 +1,5 @@
 <script lang="ts">
-    import type { AlAdhanTypes } from "@islamicnetwork/sdk";
-    import {
-        formatDuration,
-        intervalToDuration,
-        type Duration,
-    } from "date-fns";
+    import { type Duration } from "date-fns";
 
     let { duration }: { duration: Duration | null } = $props();
 </script>

@@ -1,7 +1,6 @@
 <script lang="ts">
+    import { Settings } from "@lucide/svelte";
     import { settings } from "../../lib/settings-manager.svelte";
-    import { banner } from "../../lib/banner-manager.svelte";
-    import { X, Settings } from "@lucide/svelte";
 
     import detectLocation from "../../utils/detectLocation";
 

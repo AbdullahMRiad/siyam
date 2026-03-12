@@ -5,21 +5,18 @@
         "font-size: 1.5em;",
     );
 
-    import "./app.css";
     import "@fontsource-variable/bricolage-grotesque";
     import "@fontsource-variable/kufam";
+    import "./app.css";
 
-    import type { Duration } from "date-fns";
-
-    import { settings } from "./lib/settings-manager.svelte";
-    import { prayerTimesManager } from "./lib/prayer-times.svelte";
-    import { status } from "./lib/status-manager.svelte";
     import { banner } from "./lib/banner-manager.svelte";
+    import { prayerTimesManager } from "./lib/prayer-times.svelte";
+    import { settings } from "./lib/settings-manager.svelte";
+    import { status } from "./lib/status-manager.svelte";
 
     import Settings from "./components/settings/settings.svelte";
     import Status from "./components/status.svelte";
     import Time from "./components/time.svelte";
-    import updateStatus from "./utils/updateStatus";
     import detectLocation from "./utils/detectLocation";
     import getLuminance from "./utils/getLuminance";
 
