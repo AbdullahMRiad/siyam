@@ -8,6 +8,26 @@
     import "@fontsource-variable/bricolage-grotesque";
     import "@fontsource-variable/kufam";
     import "./app.css";
+    // Text fonts
+    import "@fontsource-variable/alexandria";
+    import "@fontsource-variable/alyamama";
+    import "@fontsource-variable/beiruti";
+    import "@fontsource-variable/cairo";
+    import "@fontsource-variable/cascadia-mono";
+    import "@fontsource-variable/fustat";
+    import "@fontsource-variable/handjet";
+    import "@fontsource-variable/mada";
+    import "@fontsource-variable/noto-naskh-arabic";
+    import "@fontsource-variable/playpen-sans-arabic";
+    import "@fontsource-variable/vazirmatn";
+    // Time fonts
+    import "@fontsource-variable/bricolage-grotesque";
+    import "@fontsource-variable/playpen-sans";
+    import "@fontsource-variable/oswald";
+    import "@fontsource-variable/playfair-display";
+    import "@fontsource-variable/orbitron";
+    import "@fontsource-variable/jetbrains-mono";
+    import "@fontsource-variable/spline-sans-mono";
 
     import { banner } from "./lib/banner-manager.svelte";
     import { prayerTimesManager } from "./lib/prayer-times.svelte";
@@ -19,6 +39,7 @@
     import Time from "./components/time.svelte";
     import detectLocation from "./utils/detectLocation";
     import getLuminance from "./utils/getLuminance";
+    import { TEXT_FONTS, TIME_FONTS } from "./constants";
 
     $effect(() => {
         banner.set(null);
@@ -61,6 +82,12 @@
     });
 
     if (!settings.isCoordsAvailable) detectLocation();
+
+    Promise.all(
+        [...TEXT_FONTS, ...TIME_FONTS].map((font) =>
+            document.fonts.load(`16px "${font}"`),
+        ),
+    ).then(() => console.log("All fonts loaded"));
 </script>
 
 <main

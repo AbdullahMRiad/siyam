@@ -5,8 +5,25 @@
     "": {
       "name": "fasting-status",
       "dependencies": {
+        "@fontsource-variable/alexandria": "^5.2.8",
+        "@fontsource-variable/alyamama": "^5.2.1",
+        "@fontsource-variable/beiruti": "^5.2.8",
         "@fontsource-variable/bricolage-grotesque": "^5.2.10",
+        "@fontsource-variable/cairo": "^5.2.7",
+        "@fontsource-variable/cascadia-mono": "^5.2.2",
+        "@fontsource-variable/fustat": "^5.2.7",
+        "@fontsource-variable/handjet": "^5.2.7",
+        "@fontsource-variable/jetbrains-mono": "^5.2.8",
         "@fontsource-variable/kufam": "^5.2.8",
+        "@fontsource-variable/mada": "^5.2.8",
+        "@fontsource-variable/noto-naskh-arabic": "^5.2.11",
+        "@fontsource-variable/orbitron": "^5.2.8",
+        "@fontsource-variable/oswald": "^5.2.8",
+        "@fontsource-variable/playfair-display": "^5.2.8",
+        "@fontsource-variable/playpen-sans": "^5.2.9",
+        "@fontsource-variable/playpen-sans-arabic": "^5.2.4",
+        "@fontsource-variable/spline-sans-mono": "^5.2.8",
+        "@fontsource-variable/vazirmatn": "^5.2.8",
         "@islamicnetwork/sdk": "^0.1.4",
         "@lucide/svelte": "^0.575.0",
         "date-fns": "^4.1.0",
@@ -34,9 +51,43 @@
 
     "@emnapi/wasi-threads": ["@emnapi/wasi-threads@1.1.0", "https://repo.huaweicloud.com/repository/npm/@emnapi/wasi-threads/-/wasi-threads-1.1.0.tgz", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-WI0DdZ8xFSbgMjR1sFsKABJ/C5OnRrjT06JXbZKexJGrDuPTzZdDYfFlsgcCXCyf+suG5QU2e/y1Wo2V/OapLQ=="],
 
+    "@fontsource-variable/alexandria": ["@fontsource-variable/alexandria@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/alexandria/-/alexandria-5.2.8.tgz", {}, "sha512-d8ApWpM48A4jwlr+cdHJeHVaoGTS3VgW3OBw7oFAgRrSDs3ANUp9jHkraRGSy2kSF48WPHIYMxb1XnFYOnujvw=="],
+
+    "@fontsource-variable/alyamama": ["@fontsource-variable/alyamama@5.2.1", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/alyamama/-/alyamama-5.2.1.tgz", {}, "sha512-lYVWCxdQ1nlO5va8sH3xIJBTPlr75r3X7UxGN7NXW0lNFcqJxM7qB7qTtOnPS8UV56tm5B5KP1TgIV504p7tGQ=="],
+
+    "@fontsource-variable/beiruti": ["@fontsource-variable/beiruti@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/beiruti/-/beiruti-5.2.8.tgz", {}, "sha512-YwJ+705l5wN03IVi1WDKdQx43mqo0gyG/IW4AX2qRY3BtwA/nZLLcol+Qhx3609mLw+6hLZk4XyS/5dBM0D+qg=="],
+
     "@fontsource-variable/bricolage-grotesque": ["@fontsource-variable/bricolage-grotesque@5.2.10", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/bricolage-grotesque/-/bricolage-grotesque-5.2.10.tgz", {}, "sha512-5EDsCqgGpKVcJWE4sg9ydli+t5WM97mISYw5lla/Ev4z71FwXh1oN0YUU8xjkRW9+wBCGD9R+ntAvI8G4bUFJg=="],
 
+    "@fontsource-variable/cairo": ["@fontsource-variable/cairo@5.2.7", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/cairo/-/cairo-5.2.7.tgz", {}, "sha512-vY7VKyZ/tuzuMVaB5AJY33TD0XJOfIyUZ0bDrvsDuiY7RkQWX1nGSNbh4ZLUSOXi2ivTOzb4tPjPBMhty2+hzg=="],
+
+    "@fontsource-variable/cascadia-mono": ["@fontsource-variable/cascadia-mono@5.2.2", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/cascadia-mono/-/cascadia-mono-5.2.2.tgz", {}, "sha512-IjtyQuB9IiV8O/q2WWh+aZaRP8Q8rKl3d7J4aw1jUOt0BRjIQu1uSufUw0W5pZr6gpgGcol+Yjq6zWP8GM0auQ=="],
+
+    "@fontsource-variable/fustat": ["@fontsource-variable/fustat@5.2.7", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/fustat/-/fustat-5.2.7.tgz", {}, "sha512-Mtuft47RTSVjI78G0iXnMh98D3dj502m8uJfoSoZprTtvinhDDrMGapfCzZbKaoMiNfElAQjcEaUfmf3Lowefg=="],
+
+    "@fontsource-variable/handjet": ["@fontsource-variable/handjet@5.2.7", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/handjet/-/handjet-5.2.7.tgz", {}, "sha512-ojym5lpolA9JpTctAiaGmeRH5q3ssos0+qgaAl2cY/iqnlsM7KmeS+jYwx/PtTvNlTusdO13s5h2A+Cut7ql9g=="],
+
+    "@fontsource-variable/jetbrains-mono": ["@fontsource-variable/jetbrains-mono@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/jetbrains-mono/-/jetbrains-mono-5.2.8.tgz", {}, "sha512-WBA9elru6Jdp5df2mES55wuOO0WIrn3kpXnI4+W2ek5u3ZgLS9XS4gmIlcQhiZOWEKl95meYdvK7xI+ETLCq/Q=="],
+
     "@fontsource-variable/kufam": ["@fontsource-variable/kufam@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/kufam/-/kufam-5.2.8.tgz", {}, "sha512-nr6FGnqac6SLpkqgQns8ui8lV+tk0gF947mJinhv4tS8yl0JUGngoTQbkWt8OLIQgwmIFe4TtOxZioQLTU8JgQ=="],
+
+    "@fontsource-variable/mada": ["@fontsource-variable/mada@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/mada/-/mada-5.2.8.tgz", {}, "sha512-AA8emJ8Wd+kAzmhB2a7jmw7PoPrnSXR5hYBmx7Jh7GlqOqI6d/523nLqp886TJxNeTOkKzJbSgYnuMTCb3SkJw=="],
+
+    "@fontsource-variable/noto-naskh-arabic": ["@fontsource-variable/noto-naskh-arabic@5.2.11", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/noto-naskh-arabic/-/noto-naskh-arabic-5.2.11.tgz", {}, "sha512-vqPRmiiI2RBYJahKyJUbeSWO36VpawWbUite+D67a1pGA7z6vAcbzQo+CeRIfat/u5Pi5SEcvANFdRgLyNPfGw=="],
+
+    "@fontsource-variable/orbitron": ["@fontsource-variable/orbitron@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/orbitron/-/orbitron-5.2.8.tgz", {}, "sha512-Jazvuj2cgBq663z1j/+JdwH2ztqQ8RaGhJgdHYphFbtfowiFaR74R8UgZl7x1skbXmUMWWH1jXfG7mrYFIYK0A=="],
+
+    "@fontsource-variable/oswald": ["@fontsource-variable/oswald@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/oswald/-/oswald-5.2.8.tgz", {}, "sha512-sIXwfKbyHOATgBWOlpR73VMQ8pA8XCToiyy6sL02ZfYEZPpW18TLtpxPBpYXId7xKbWCousOTzlJsa/9rTd8WQ=="],
+
+    "@fontsource-variable/playfair-display": ["@fontsource-variable/playfair-display@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/playfair-display/-/playfair-display-5.2.8.tgz", {}, "sha512-ZzVIXPOrL85yyOvZYoBzUszIJM+xKkHqni4IYn2CVLaGQQdJR8sBeC8yFNgjxSJ7ludTwta8qpULeOFuk5X75A=="],
+
+    "@fontsource-variable/playpen-sans": ["@fontsource-variable/playpen-sans@5.2.9", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/playpen-sans/-/playpen-sans-5.2.9.tgz", {}, "sha512-MET5qmJ9izZUhS5eQICWmofUDc8Muuf7sXLqN0NxSpdrpVfKaP6DY/dOeVBLqU6D6lyMh9KRuDEQ4UfpszN+ig=="],
+
+    "@fontsource-variable/playpen-sans-arabic": ["@fontsource-variable/playpen-sans-arabic@5.2.4", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/playpen-sans-arabic/-/playpen-sans-arabic-5.2.4.tgz", {}, "sha512-o7odAVtARFOXtZc0Z7qadkELgPIoJrspoorBSZyGxI8rH5JwOH8FIVWC8/icHCHgyds4ilnD7puLqIpr7lj8/g=="],
+
+    "@fontsource-variable/spline-sans-mono": ["@fontsource-variable/spline-sans-mono@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/spline-sans-mono/-/spline-sans-mono-5.2.8.tgz", {}, "sha512-Z1yYiEtP+8Gll5BJaR9dICK/ZTxoTWH+ZBH6rOTMWajPSOxwl7IZplkwX2J1QhMxqulhhdMrkRx6SkkLM+jLQw=="],
+
+    "@fontsource-variable/vazirmatn": ["@fontsource-variable/vazirmatn@5.2.8", "https://repo.huaweicloud.com/repository/npm/@fontsource-variable/vazirmatn/-/vazirmatn-5.2.8.tgz", {}, "sha512-2YzXfH4PNOeoZsBsgJgjbnm+IC2nonGyMLX3gXLm8FQrP+wpi1uGBIWYWlEzJ0lmntgdyAc3lRViHHfZWKvbog=="],
 
     "@islamicnetwork/sdk": ["@islamicnetwork/sdk@0.1.4", "https://repo.huaweicloud.com/repository/npm/@islamicnetwork/sdk/-/sdk-0.1.4.tgz", {}, "sha512-AqdfKYKT2dLTSymnrQ3c3VHMxZ9mxxY94eOwWENF+LUNxMzrabvVnnAHXq5H0XA8d+uD/iO5GDJ0KwzlhU1Eqw=="],
 

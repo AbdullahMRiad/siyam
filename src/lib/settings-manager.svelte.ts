@@ -1,3 +1,6 @@
+import { TEXT_FONTS, TIME_FONTS } from "../constants";
+import type { TextFont, TimeFont } from "../types";
+
 export class SettingsManager {
     latitude: number | null = $state(null);
     longitude: number | null = $state(null);
@@ -5,8 +8,8 @@ export class SettingsManager {
     foregroundColor = $state("#ffffff");
     fontSize = $state(128);
     fontWeight = $state(400);
-    textFontFamily = $state("Kufam Variable");
-    timeFontFamily = $state("Bricolage Grotesque Variable");
+    textFontFamily = $state<TextFont>("Alexandria Variable");
+    timeFontFamily = $state<TimeFont>("Bricolage Grotesque Variable");
 
     constructor() {
         if (typeof window === "undefined") return;
@@ -23,9 +26,16 @@ export class SettingsManager {
         this.backgroundColor = params.get("bg") ?? "#121212";
         this.foregroundColor = params.get("fg") ?? "#ececec";
 
-        this.textFontFamily = params.get("text_font") ?? "Kufam Variable";
-        this.timeFontFamily =
-            params.get("time_font") ?? "Bricolage Grotesque Variable";
+        this.textFontFamily = TEXT_FONTS.includes(
+            (params.get("text_font") as TextFont) ?? "",
+        )
+            ? (params.get("text_font") as TextFont)
+            : "Alexandria Variable";
+        this.timeFontFamily = TIME_FONTS.includes(
+            (params.get("time_font") as TimeFont) ?? "",
+        )
+            ? (params.get("time_font") as TimeFont)
+            : "Bricolage Grotesque Variable";
         this.fontSize = params.get("font_size")
             ? parseInt(params.get("font_size")!)
             : window.innerWidth > 780

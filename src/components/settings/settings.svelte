@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Settings } from "@lucide/svelte";
     import { settings } from "../../lib/settings-manager.svelte";
+    import { TIME_FONTS, TEXT_FONTS } from "../../constants";
 
     import detectLocation from "../../utils/detectLocation";
 
@@ -98,11 +99,25 @@
             </div>
             <label class="control">
                 <span class="label">خط النص</span>
-                <input type="text" bind:value={settings.textFontFamily} />
+                <select
+                    name="text-font"
+                    id="text-font"
+                    bind:value={settings.textFontFamily}>
+                    {#each TEXT_FONTS as font}
+                        <option value={font}>{font}</option>
+                    {/each}
+                </select>
             </label>
             <label class="control">
                 <span class="label">خط الوقت</span>
-                <input type="text" bind:value={settings.timeFontFamily} />
+                <select
+                    name="time-font"
+                    id="time-font"
+                    bind:value={settings.timeFontFamily}>
+                    {#each TIME_FONTS as font}
+                        <option value={font}>{font}</option>
+                    {/each}
+                </select>
             </label>
             <label class="control">
                 <span class="label">حجم الخط</span>
