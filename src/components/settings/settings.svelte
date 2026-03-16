@@ -293,6 +293,14 @@
             border: 0;
             padding: 0;
         }
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        &::-webkit-color-swatch {
+            border: 0;
+        }
     }
 
     .color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input.color-input
