@@ -134,6 +134,10 @@ html {
     font-size: 16px;
 }
 
+body {
+    overflow: hidden;
+}
+
 #app {
     background: var(--color-paper);
     color: var(--color-ink);
