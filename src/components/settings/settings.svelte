@@ -249,6 +249,7 @@
         font-weight: 500;
         background-color: var(--color-surface);
         border-bottom: 1px solid var(--color-rule);
+        z-index: 10;
     }
 
     .controls {
