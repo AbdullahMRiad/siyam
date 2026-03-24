@@ -189,6 +189,21 @@
                 </div>
             </label>
         </div>
+        <footer>
+            صنع من قبل <a
+                href="https://www.github.com/AbdullahMRiad"
+                target="_blank"
+                rel="noopener noreferrer">
+                عبدالله
+            </a>
+            <br />
+            <a
+                href="https://www.github.com/AbdullahMRiad/fasting-status"
+                target="_blank"
+                rel="noopener noreferrer">
+                اطلع على المصدر
+            </a>
+        </footer>
     </dialog>
 </div>
 
@@ -371,6 +386,10 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0.5rem;
+    }
+
+    footer {
+        text-align: center;
     }
 
     @media (width <= 750px) {
