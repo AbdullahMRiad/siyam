@@ -2,53 +2,59 @@ import { TEXT_FONTS, TIME_FONTS } from "../constants";
 import type { TextFont, TimeFont } from "../types";
 
 export class SettingsManager {
-    latitude: number | null = $state(null);
-    longitude: number | null = $state(null);
-    backgroundColor = $state("#ffffff");
-    foregroundColor = $state("#ffffff");
-    fontSize = $state(128);
-    fontWeight = $state(400);
-    textFontFamily = $state<TextFont>("Alexandria Variable");
-    timeFontFamily = $state<TimeFont>("Bricolage Grotesque Variable");
-    spacing = $state(0);
+    defaults = {
+        latitude: null,
+        longitude: null,
+        backgroundColor: "#121212",
+        foregroundColor: "#ececec",
+        fontSize: window.innerWidth > 780 ? 128 : 64,
+        fontWeight: 400,
+        textFontFamily: "Alexandria Variable",
+        timeFontFamily: "Bricolage Grotesque Variable",
+        spacing: 0,
+        reverse: false,
+    };
+
+    latitude: number | null = $state(this.defaults.latitude);
+    longitude: number | null = $state(this.defaults.longitude);
+    backgroundColor = $state(this.defaults.backgroundColor);
+    foregroundColor = $state(this.defaults.foregroundColor);
+    fontSize = $state(this.defaults.fontSize);
+    fontWeight = $state(this.defaults.fontWeight);
+    textFontFamily = $state<TextFont>(this.defaults.textFontFamily as TextFont);
+    timeFontFamily = $state<TimeFont>(this.defaults.timeFontFamily as TimeFont);
+    spacing = $state(this.defaults.spacing);
+    reverse = $state(this.defaults.reverse);
 
     constructor() {
         if (typeof window === "undefined") return;
 
-        const params = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(
+            new URLSearchParams(window.location.search),
+        );
 
-        this.latitude = params.get("latitude")
-            ? parseFloat(params.get("latitude")!)
-            : null;
-        this.longitude = params.get("longitude")
-            ? parseFloat(params.get("longitude")!)
-            : null;
+        params.latitude && (this.latitude = parseFloat(params.latitude));
+        params.longitude && (this.longitude = parseFloat(params.longitude));
 
-        this.backgroundColor = params.get("bg") ?? "#121212";
-        this.foregroundColor = params.get("fg") ?? "#ececec";
+        params.bg && (this.backgroundColor = params.bg);
+        params.fg && (this.foregroundColor = params.fg);
 
-        this.textFontFamily = TEXT_FONTS.includes(
-            (params.get("text_font") as TextFont) ?? "",
-        )
-            ? (params.get("text_font") as TextFont)
-            : "Alexandria Variable";
-        this.timeFontFamily = TIME_FONTS.includes(
-            (params.get("time_font") as TimeFont) ?? "",
-        )
-            ? (params.get("time_font") as TimeFont)
-            : "Bricolage Grotesque Variable";
-        this.fontSize = params.get("font_size")
-            ? parseInt(params.get("font_size")!)
-            : window.innerWidth > 780
-              ? 128
-              : 64;
-        this.fontWeight = params.get("font_weight")
-            ? parseFloat(params.get("font_weight")!)
-            : 400;
+        params.text_font &&
+            TEXT_FONTS.includes(params.text_font) &&
+            (this.textFontFamily = params.text_font);
+        params.time_font &&
+            TIME_FONTS.includes(params.time_font) &&
+            (this.timeFontFamily = params.time_font);
 
-        this.spacing = params.get("spacing")
-            ? parseFloat(params.get("spacing")!)
-            : 0;
+        params.font_size && (this.fontSize = parseFloat(params.font_size));
+        params.font_weight &&
+            (this.fontWeight = parseFloat(params.font_weight));
+
+        params.spacing && (this.spacing = parseFloat(params.spacing));
+
+        params.reverse &&
+            parseFloat(params.reverse) === 1 &&
+            (this.reverse = true);
     }
 
     get isCoordsAvailable() {
@@ -59,44 +65,35 @@ export class SettingsManager {
         if (typeof window === "undefined") return;
 
         const params = new URLSearchParams(window.location.search);
-        const defaults = {
-            bg: "#121212",
-            fg: "#ececec",
-            fontSize: window.innerWidth > 780 ? 128 : 64,
-            fontWeight: 400,
-            textFontFamily: "Alexandria Variable",
-            timeFontFamily: "Bricolage Grotesque Variable",
-            spacing: 0,
-        };
 
-        this.latitude
+        this.latitude !== this.defaults.latitude
             ? params.set("latitude", String(this.latitude))
             : params.delete("latitude");
-        this.longitude
+        this.longitude !== this.defaults.longitude
             ? params.set("longitude", String(this.longitude))
             : params.delete("longitude");
 
-        this.backgroundColor !== defaults.bg
+        this.backgroundColor !== this.defaults.backgroundColor
             ? params.set("bg", this.backgroundColor)
             : params.delete("bg");
-        this.foregroundColor !== defaults.fg
+        this.foregroundColor !== this.defaults.foregroundColor
             ? params.set("fg", this.foregroundColor)
             : params.delete("fg");
 
-        this.fontSize !== defaults.fontSize
+        this.fontSize !== this.defaults.fontSize
             ? params.set("font_size", String(this.fontSize))
             : params.delete("font_size");
-        this.fontWeight !== defaults.fontWeight
+        this.fontWeight !== this.defaults.fontWeight
             ? params.set("font_weight", String(this.fontWeight))
             : params.delete("font_weight");
-        this.textFontFamily !== defaults.textFontFamily
+        this.textFontFamily !== this.defaults.textFontFamily
             ? params.set("text_font", this.textFontFamily)
             : params.delete("text_font");
-        this.timeFontFamily !== defaults.timeFontFamily
+        this.timeFontFamily !== this.defaults.timeFontFamily
             ? params.set("time_font", this.timeFontFamily)
             : params.delete("time_font");
 
-        this.spacing !== defaults.spacing
+        this.spacing !== this.defaults.spacing
             ? params.set("spacing", String(this.spacing))
             : params.delete("spacing");
 
