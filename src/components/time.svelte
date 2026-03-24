@@ -5,7 +5,8 @@
 
 <div
     style:font-family={settings.timeFontFamily}
-    style:font-variant-numeric="tabular-nums">
+    style:font-variant-numeric="tabular-nums"
+    style:margin-top={settings.spacing + "px"}>
     {#if status.timeUntilNextEvent === null}
         <span class="duration">00:00:00</span>
     {:else}

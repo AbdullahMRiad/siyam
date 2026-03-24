@@ -10,6 +10,7 @@ export class SettingsManager {
     fontWeight = $state(400);
     textFontFamily = $state<TextFont>("Alexandria Variable");
     timeFontFamily = $state<TimeFont>("Bricolage Grotesque Variable");
+    spacing = $state(0);
 
     constructor() {
         if (typeof window === "undefined") return;
@@ -44,6 +45,10 @@ export class SettingsManager {
         this.fontWeight = params.get("font_weight")
             ? parseFloat(params.get("font_weight")!)
             : 400;
+
+        this.spacing = params.get("spacing")
+            ? parseFloat(params.get("spacing")!)
+            : 0;
     }
 
     get isCoordsAvailable() {
@@ -61,6 +66,7 @@ export class SettingsManager {
             fontWeight: 400,
             textFontFamily: "Alexandria Variable",
             timeFontFamily: "Bricolage Grotesque Variable",
+            spacing: 0,
         };
 
         this.latitude
@@ -89,6 +95,10 @@ export class SettingsManager {
         this.timeFontFamily !== defaults.timeFontFamily
             ? params.set("time_font", this.timeFontFamily)
             : params.delete("time_font");
+
+        this.spacing !== defaults.spacing
+            ? params.set("spacing", String(this.spacing))
+            : params.delete("spacing");
 
         const url = `${window.location.pathname}?${params.toString()}`;
         console.log("Settigns changed. Current URL:", url);

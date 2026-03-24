@@ -188,6 +188,17 @@
                         bind:value={settings.fontWeight} />
                 </div>
             </label>
+            <label class="control">
+                <span class="label">المسافة</span>
+                <div class="slider-control">
+                    <input type="text" bind:value={settings.spacing} />
+                    <input
+                        type="range"
+                        max="150"
+                        min="-100"
+                        bind:value={settings.spacing} />
+                </div>
+            </label>
         </div>
         <footer>
             صنع من قبل <a
