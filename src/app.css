@@ -139,6 +139,7 @@ body {
 }
 
 #app {
+    overflow: hidden;
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-text);
